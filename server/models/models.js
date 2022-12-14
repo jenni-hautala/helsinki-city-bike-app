@@ -1,0 +1,1 @@
+// Sequalize data model
