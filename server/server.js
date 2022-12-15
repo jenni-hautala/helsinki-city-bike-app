@@ -21,6 +21,23 @@ app.use(bodyParser.json());
 // Application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//------------------------------------------------
+// Synchronize database
+//------------------------------------------------
+const db = require("./app/models");
+db.sequelize
+  .sync()
+  .then(() => {
+    console.log("DB sync success.");
+  })
+  .catch((err) => {
+    console.log(`DB sync failed: ${err.message}`);
+  });
+
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and re-sync db.");
+// });
+
 // Connect
 app.get("/", (req, res) => {
   res.json({ message: "Hello, this is bike application!" });
